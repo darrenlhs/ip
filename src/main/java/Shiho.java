@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Shiho {
@@ -14,7 +15,6 @@ public class Shiho {
 
             if (userReply == null) {
               System.out.println("Empty input detected");
-
             }
             else if (userReply.equals("bye")) {
                 System.out.println("Bye. Come back soon.");
@@ -76,9 +76,41 @@ public class Shiho {
                 }
             }
             else {
-                user_inputs[counter] = new Task(userReply);
+                if (userReply.startsWith("todo")) {
+                    String[] todoArr = userReply.split("todo ");
+                    user_inputs[counter] = new ToDo(todoArr[1]);
+                }
+                else if (userReply.startsWith("deadline")) {
+                    /* given the command deadline finish homework /by 8pm:
+                    deadlineArr1 = [finish homework /by 8pm]
+                    deadlineArr2 = [finish homework, 8pm]
+                     */
+                    String[] deadlineArr1 = userReply.split("deadline ");
+                    String[] deadlineArr2 = deadlineArr1[1].split(" /by ");
+                    user_inputs[counter] = new Deadline(deadlineArr2[0], deadlineArr2[1]);
+                }
+                else if (userReply.startsWith("event")) {
+                    /* given the command event family dinner /from today 6pm /to 7pm:
+                    eventArr1 = [, family dinner /from today 6pm /to 7pm]
+                    eventArr2 = [family dinner, today 6pm /to 7pm]
+                    eventArr3 = [today 6pm, 7pm]
+                     */
+                    String[] eventArr1 = userReply.split("event ");
+                    String[] eventArr2 = eventArr1[1].split(" /from ");
+                    String[] eventArr3 = eventArr2[1].split(" /to ");
+
+                    user_inputs[counter] = new Event(eventArr2[0], eventArr3[0], eventArr3[1]);
+
+                }
+                System.out.println("\n" + "Got it. I've added this task: " + user_inputs[counter].toString() + "\n");
                 counter++;
-                System.out.println("\n" + "added: " + userReply + "\n");
+                if (counter == 1) {
+                    System.out.println("Now you have 1 task in the list.\n");
+                }
+                else {
+                    System.out.println("Now you have " + counter + " tasks in the list.\n");
+                }
+
             }
         }
 
