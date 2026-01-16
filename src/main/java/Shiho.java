@@ -12,10 +12,15 @@ public class Shiho {
             String userReply = myScan.nextLine();
             String[] parts = userReply.split(" ");
 
-            if (userReply.equals("bye")) {
+            if (userReply == null) {
+              System.out.println("Empty input detected");
+
+            }
+            else if (userReply.equals("bye")) {
                 System.out.println("Bye. Come back soon.");
                 break;
-            } else if (userReply.equals("list")) {
+            }
+            else if (userReply.equals("list")) {
                 System.out.println("Here are your tasks:");
                 for (int i = 0; i < user_inputs.length; i++) {
                     if (user_inputs[i] == null) {
@@ -29,29 +34,48 @@ public class Shiho {
                             + "] "
                             + user_inputs[i].description);
                 }
-            } else if (parts[0].equals("mark")) {
-                int taskNumber = Integer.parseInt(parts[1]);
-                user_inputs[taskNumber - 1].markAsDone();
-                System.out.println(
-                        "Okay. I've marked this task as done:\n"
-                        + "   ["
-                        + user_inputs[taskNumber - 1].getStatusIcon()
-                        + "] "
-                        + user_inputs[taskNumber - 1].description
-                );
+            }
+            else if (parts[0].equals("mark")) {
+                try {
+                    int taskNumber = Integer.parseInt(parts[1]);
+                    user_inputs[taskNumber - 1].markAsDone();
+                    System.out.println(
+                            "Okay. I've marked this task as done:\n"
+                                    + "   ["
+                                    + user_inputs[taskNumber - 1].getStatusIcon()
+                                    + "] "
+                                    + user_inputs[taskNumber - 1].description
+                    );
+                }
+                catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
+                    System.out.println("Invalid task index\n");
+                }
+                catch (NumberFormatException e) {
+                    System.out.println("Non-integer task index provided\n");
+                }
 
 
-            } else if (parts[0].equals("unmark")) {
-                int taskNumber = Integer.parseInt(parts[1]);
-                user_inputs[taskNumber - 1].markAsUndone();
-                System.out.println(
-                        "Okay. I've marked this task as not done yet:\n"
-                                + "   ["
-                                + user_inputs[taskNumber - 1].getStatusIcon()
-                                + "] "
-                                + user_inputs[taskNumber - 1].description
-                );
-            } else {
+            }
+            else if (parts[0].equals("unmark")) {
+                try {
+                    int taskNumber = Integer.parseInt(parts[1]);
+                    user_inputs[taskNumber - 1].markAsUndone();
+                    System.out.println(
+                            "Okay. I've marked this task as not done yet:\n"
+                                    + "   ["
+                                    + user_inputs[taskNumber - 1].getStatusIcon()
+                                    + "] "
+                                    + user_inputs[taskNumber - 1].description
+                    );
+                }
+                catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
+                    System.out.println("Invalid task index\n");
+                }
+                catch (NumberFormatException e) {
+                    System.out.println("Non-integer task index provided\n");
+                }
+            }
+            else {
                 user_inputs[counter] = new Task(userReply);
                 counter++;
                 System.out.println("\n" + "added: " + userReply + "\n");
