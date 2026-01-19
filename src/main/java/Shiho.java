@@ -6,22 +6,20 @@ public class Shiho {
         Task[] user_inputs = new Task[100];
         int counter = 0;
 
-        System.out.println("Hello, I'm Shiho.\n" + "What do you need?\n");
+        System.out.println("Hello, I'm Shiho Hinomori.\n" + "What do you need?\n");
+
+        Scanner myScan = new Scanner(System.in);
 
         while (true) {
-            Scanner myScan = new Scanner(System.in);
             String userReply = myScan.nextLine();
             String[] parts = userReply.split(" ");
 
-            if (userReply == null) {
-              System.out.println("Empty input detected");
-            }
-            else if (userReply.equals("bye")) {
+            if (userReply.equals("bye")) {
                 System.out.println("Bye. Come back soon.");
                 break;
             }
             else if (userReply.equals("list")) {
-                System.out.println("Here are your tasks:");
+                System.out.println("Here are your tasks:\n");
                 for (int i = 0; i < user_inputs.length; i++) {
                     if (user_inputs[i] == null) {
                         break;
@@ -76,18 +74,38 @@ public class Shiho {
                 }
             }
             else {
+                boolean isValid = true;
+
                 if (userReply.startsWith("todo")) {
-                    String[] todoArr = userReply.split("todo ");
-                    user_inputs[counter] = new ToDo(todoArr[1]);
+                    try {
+                        String[] todoArr = userReply.split("todo ");
+                        user_inputs[counter] = new ToDo(todoArr[1]);
+                    }
+                    catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println(
+                                "Wrong input syntax. Correct syntax is 'todo (task name)'.\n"
+                        );
+                        isValid = false;
+                    }
+
                 }
                 else if (userReply.startsWith("deadline")) {
                     /* given the command deadline finish homework /by 8pm:
                     deadlineArr1 = [finish homework /by 8pm]
                     deadlineArr2 = [finish homework, 8pm]
                      */
-                    String[] deadlineArr1 = userReply.split("deadline ");
-                    String[] deadlineArr2 = deadlineArr1[1].split(" /by ");
-                    user_inputs[counter] = new Deadline(deadlineArr2[0], deadlineArr2[1]);
+                    try {
+                        String[] deadlineArr1 = userReply.split("deadline ");
+                        String[] deadlineArr2 = deadlineArr1[1].split(" /by ");
+                        user_inputs[counter] = new Deadline(deadlineArr2[0], deadlineArr2[1]);
+                    }
+                    catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println(
+                                "Wrong input syntax. Correct syntax is 'deadline (task name) /by (deadline)'.\n"
+                        );
+                        isValid = false;
+                    }
+
                 }
                 else if (userReply.startsWith("event")) {
                     /* given the command event family dinner /from today 6pm /to 7pm:
@@ -95,21 +113,39 @@ public class Shiho {
                     eventArr2 = [family dinner, today 6pm /to 7pm]
                     eventArr3 = [today 6pm, 7pm]
                      */
-                    String[] eventArr1 = userReply.split("event ");
-                    String[] eventArr2 = eventArr1[1].split(" /from ");
-                    String[] eventArr3 = eventArr2[1].split(" /to ");
+                    try {
+                        String[] eventArr1 = userReply.split("event ");
+                        String[] eventArr2 = eventArr1[1].split(" /from ");
+                        String[] eventArr3 = eventArr2[1].split(" /to ");
 
-                    user_inputs[counter] = new Event(eventArr2[0], eventArr3[0], eventArr3[1]);
-
-                }
-                System.out.println("\n" + "Got it. I've added this task: " + user_inputs[counter].toString() + "\n");
-                counter++;
-                if (counter == 1) {
-                    System.out.println("Now you have 1 task in the list.\n");
+                        user_inputs[counter] = new Event(eventArr2[0], eventArr3[0], eventArr3[1]);
+                    }
+                    catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println(
+                                "Wrong input syntax. Correct syntax is 'event (task name) /from (start) /to (end)'.\n"
+                        );
+                        isValid = false;
+                    }
                 }
                 else {
-                    System.out.println("Now you have " + counter + " tasks in the list.\n");
+                    System.out.println("Your input is either empty or not recognised. Please try again.\n");
+                    isValid = false;
                 }
+                if (isValid) {
+                    // only increments and adds to task list if task command is valid
+
+                    System.out.println("\n" + "Got it. I've added this task: " + user_inputs[counter].toString() + "\n");
+                    counter++;
+
+                    if (counter == 1) {
+                        System.out.println("Now you have 1 task in the list.\n");
+                    }
+                    else {
+                        System.out.println("Now you have " + counter + " tasks in the list.\n");
+                    }
+                }
+
+
 
             }
         }
