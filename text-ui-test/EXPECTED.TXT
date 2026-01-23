@@ -1,7 +1,7 @@
 Hello, I'm Shiho Hinomori.
 What do you need?
 
-Here are your tasks:
+The task list is empty.
 
 Got it. I've added this task: [T][ ] borrow book
 
