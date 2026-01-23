@@ -1,3 +1,5 @@
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -5,9 +7,11 @@ import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import java.io.File;
 import java.io.BufferedWriter;
 import java.io.IOException;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Shiho {
     public static void main(String[] args) throws IOException {
@@ -132,36 +136,59 @@ public class Shiho {
                     }
 
                 } else if (userReply.startsWith("deadline")) {
-                    /* given the command deadline finish homework /by 8pm:
-                    deadlineArr1 = [finish homework /by 8pm]
-                    deadlineArr2 = [finish homework, 8pm]
+                    /* given the command deadline finish homework /by 2026-01-25 2000:
+                    deadlineArr1 = [, finish homework /by 2026-01-25 2000]
+                    deadlineArr2 = [finish homework, 2026-01-25 2000]
                      */
                     try {
                         String[] deadlineArr1 = userReply.split("deadline ");
                         String[] deadlineArr2 = deadlineArr1[1].split(" /by ");
-                        user_inputs.add(new Deadline(deadlineArr2[0], deadlineArr2[1]));
-                    } catch (IndexOutOfBoundsException e) {
+                        String description = deadlineArr2[0];
+                        String dateStr = deadlineArr2[1];
+
+                        LocalDateTime dateTime =
+                                LocalDateTime.parse(dateStr,
+                                        DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+
+
+                        user_inputs.add(new Deadline(description, dateTime));
+                    } catch (IndexOutOfBoundsException | DateTimeParseException e) {
                         System.out.println(
                                 "Wrong input syntax. Correct syntax is 'deadline (task name) /by (deadline)'.\n"
+                                        + "Format for deadline is 'YYYY-MM-DD time'.\n"
+                                        + "Times should be in 24-hour format i.e XXXX.\n"
                         );
                         isValid = false;
                     }
 
                 } else if (userReply.startsWith("event")) {
-                    /* given the command event family dinner /from today 6pm /to 7pm:
-                    eventArr1 = [, family dinner /from today 6pm /to 7pm]
-                    eventArr2 = [family dinner, today 6pm /to 7pm]
-                    eventArr3 = [today 6pm, 7pm]
+                    /* given the command event family dinner /from 2026-01-25 6pm /to 2026-01-25 7pm:
+                    eventArr1 = [, family dinner /from 2026-01-25 6pm /to 2026-01-25 7pm]
+                    eventArr2 = [family dinner, 2026-01-25 6pm /to 2026-01-25 7pm]
+                    eventArr3 = [2026-01-25 6pm, 2026-01-25 7pm]
                      */
                     try {
                         String[] eventArr1 = userReply.split("event ");
                         String[] eventArr2 = eventArr1[1].split(" /from ");
                         String[] eventArr3 = eventArr2[1].split(" /to ");
 
-                        user_inputs.add(new Event(eventArr2[0], eventArr3[0], eventArr3[1]));
-                    } catch (IndexOutOfBoundsException e) {
+                        String fromDateStr = eventArr3[0];
+                        String toDateStr = eventArr3[1];
+
+                        LocalDateTime fromDateTime =
+                                LocalDateTime.parse(fromDateStr,
+                                        DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+
+                        LocalDateTime toDateTime =
+                                LocalDateTime.parse(toDateStr,
+                                        DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+
+                        user_inputs.add(new Event(eventArr2[0], fromDateTime, toDateTime));
+                    } catch (IndexOutOfBoundsException | DateTimeParseException e) {
                         System.out.println(
                                 "Wrong input syntax. Correct syntax is 'event (task name) /from (start) /to (end)'.\n"
+                                        + "Format for both start and end is 'YYYY-MM-DD time'.\n"
+                                        + "Times should be in 24-hour format i.e XXXX.\n"
                         );
                         isValid = false;
                     }
@@ -199,11 +226,6 @@ public class Shiho {
                     } catch (IOException e) {
 
                     }
-
-
-
-
-
 
 
 
