@@ -1,3 +1,5 @@
+package shiho;
+
 import java.util.Scanner;
 
 public class Ui {
