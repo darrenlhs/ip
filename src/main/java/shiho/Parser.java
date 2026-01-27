@@ -2,12 +2,10 @@ package shiho;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-    public Parser() {
-    }
+    public Parser() {}
 
     /**
      * Returns a string (to be encoded by Shiho.run()) depending on the user input
@@ -60,10 +58,6 @@ public class Parser {
      * @return Task object represented by the line.
      */
     public static Task parseFileLine(String line) {
-        // parses a line from a text file and returns a Task representing the line
-        // line format is 'X | y | description | deadline/duration (if applicable)'
-        // X = T, D or E depending on task type
-        // y = 0 or 1 depending on if task is marked undone or done respectively
         String[] parts = line.split(" \\| ");
 
         // parts[0] = X
@@ -77,23 +71,24 @@ public class Parser {
 
         } else if (parts[0].equals("D")) {
             // Deadline task
-            LocalDateTime deadlineDate = LocalDateTime.parse(parts[3],
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            LocalDateTime deadlineDate =
+                    LocalDateTime.parse(parts[3],
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
             Task task = new Deadline(parts[2], deadlineDate);
             task.isDone = isDone;
             return task;
-
         } else {
             // Event task
             String[] fromTo = parts[3].split(" to ");
-            LocalDateTime eventFrom = LocalDateTime.parse(fromTo[0],
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-            LocalDateTime eventTo = LocalDateTime.parse(fromTo[1],
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            LocalDateTime eventFrom =
+                    LocalDateTime.parse(fromTo[0],
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            LocalDateTime eventTo =
+                    LocalDateTime.parse(fromTo[1],
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
             Task task = new Event(parts[2], eventFrom, eventTo);
             task.isDone = isDone;
             return task;
         }
-
     }
 }
