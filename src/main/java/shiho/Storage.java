@@ -15,6 +15,12 @@ public class Storage {
         this.filePath = Paths.get(filePath);
     }
 
+    /**
+     * Loads tasks from the storage file. Creates the file if it does not exist.
+     *
+     * @return An ArrayList of tasks stored in the given file path.
+     * @throws IOException If an error occurs while creating or loading the file.
+     */
     public ArrayList<Task> load() throws IOException {
         // loads the existing task list from the file path, and creates a new one if it doesn't exist
 
@@ -36,6 +42,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves tasks stored in the storage file.
+     *
+     * @throws IOException If an error occurs while saving the file.
+     */
     public void save(ArrayList<Task> tasks) throws IOException {
         try (BufferedWriter writer = Files.newBufferedWriter(filePath)) {
             for (Task t : tasks) {
