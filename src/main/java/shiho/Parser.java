@@ -9,7 +9,12 @@ public class Parser {
     public Parser() {
     }
 
-
+    /**
+     * Returns a string (to be encoded by Shiho.run()) depending on the user input
+     *
+     * @param userInput The input entered into the chatbot by the user
+     * @return String representing the type of user input
+     */
     public String parse(String userInput) {
         // returns a specific String depending on userInput and handles it in Shiho
         String[] parts = userInput.split(" ");
@@ -52,10 +57,15 @@ public class Parser {
                 return "invalid";
             }
 
-            }
+        }
     }
 
-
+    /**
+     * Returns a Task object that the file line represents.
+     *
+     * @param line The current line in the text file being parsed.
+     * @return Task object represented by the line.
+     */
     public static Task parseFileLine(String line) {
         // parses a line from a text file and returns a Task representing the line
         // line format is 'X | y | description | deadline/duration (if applicable)'
