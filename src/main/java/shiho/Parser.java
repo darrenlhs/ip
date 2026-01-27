@@ -6,12 +6,7 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-    private TaskList tasks;
-    private Ui ui;
-
-    public Parser(TaskList tasks, Ui ui) {
-        this.tasks = tasks;
-        this.ui = ui;
+    public Parser() {
     }
 
 

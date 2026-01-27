@@ -14,6 +14,7 @@ public class Shiho {
     public Shiho(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        parser = new Parser();
 
         try {
             tasks = new TaskList(storage.load());
@@ -21,8 +22,6 @@ public class Shiho {
             ui.showLoadError();
             tasks = new TaskList();
         }
-        // cause parser relies on both TaskList and Ui
-        parser = new Parser(tasks, ui);
     }
 
     public void run() {
