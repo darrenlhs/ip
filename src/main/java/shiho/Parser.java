@@ -2,13 +2,10 @@ package shiho;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-    public Parser() {
-    }
-
+    public Parser() {}
 
     public String parse(String userInput) {
         // returns a specific String depending on userInput and handles it in Shiho
@@ -36,23 +33,16 @@ public class Parser {
 
         } else {
             // todo, deadline and event commands indicate specific types of tasks to be added to the list
-
-            boolean isValid = true;
-
             if (userInput.startsWith("todo")) {
                 return "todo";
-
             } else if (userInput.startsWith("deadline")) {
                 return "deadline";
-
-
             } else if (userInput.startsWith("event")) {
                 return "event";
             } else {
                 return "invalid";
             }
-
-            }
+        }
     }
 
 
@@ -74,8 +64,9 @@ public class Parser {
 
         } else if (parts[0].equals("D")) {
             // Deadline task
-            LocalDateTime deadlineDate = LocalDateTime.parse(parts[3],
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            LocalDateTime deadlineDate =
+                    LocalDateTime.parse(parts[3],
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
             Task task = new Deadline(parts[2], deadlineDate);
             task.isDone = isDone;
             return task;
@@ -83,14 +74,15 @@ public class Parser {
         } else {
             // Event task
             String[] fromTo = parts[3].split(" to ");
-            LocalDateTime eventFrom = LocalDateTime.parse(fromTo[0],
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-            LocalDateTime eventTo = LocalDateTime.parse(fromTo[1],
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            LocalDateTime eventFrom =
+                    LocalDateTime.parse(fromTo[0],
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            LocalDateTime eventTo =
+                    LocalDateTime.parse(fromTo[1],
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
             Task task = new Event(parts[2], eventFrom, eventTo);
             task.isDone = isDone;
             return task;
         }
-
     }
 }

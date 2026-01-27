@@ -67,13 +67,12 @@ public class Shiho {
                 try {
                     int taskNumber = Integer.parseInt(parts[1]);
                     tasks.get(taskNumber - 1).markAsDone();
-                    ui.show(
-                            "Okay. I've marked this task as done:\n"
-                                    + "   ["
-                                    + tasks.get(taskNumber - 1).getStatusIcon()
-                                    + "] "
-                                    + tasks.get(taskNumber - 1).description
-                                    + "\n"
+                    ui.show("Okay. I've marked this task as done:\n"
+                            + "   ["
+                            + tasks.get(taskNumber - 1).getStatusIcon()
+                            + "] "
+                            + tasks.get(taskNumber - 1).description
+                            + "\n"
                     );
                 } catch (IndexOutOfBoundsException | NullPointerException e) {
                     if (tasks.isEmpty()) {
@@ -91,13 +90,12 @@ public class Shiho {
                 try {
                     int taskNumber = Integer.parseInt(parts[1]);
                     tasks.get(taskNumber - 1).markAsUndone();
-                    ui.show(
-                            "Okay. I've marked this task as not done yet:\n"
-                                    + "   ["
-                                    + tasks.get(taskNumber - 1).getStatusIcon()
-                                    + "] "
-                                    + tasks.get(taskNumber - 1).description
-                                    + "\n"
+                    ui.show("Okay. I've marked this task as not done yet:\n"
+                            + "   ["
+                            + tasks.get(taskNumber - 1).getStatusIcon()
+                            + "] "
+                            + tasks.get(taskNumber - 1).description
+                            + "\n"
                     );
                 } catch (IndexOutOfBoundsException | NullPointerException e) {
                     if (tasks.isEmpty()) {
@@ -115,10 +113,7 @@ public class Shiho {
                 try {
                     int taskNumber = Integer.parseInt(parts[1]);
                     Task removed = tasks.remove(taskNumber - 1);
-                    ui.show(
-                            "Noted. I've removed this task:\n   "
-                                    + removed.toString()
-                    );
+                    ui.show("Noted. I've removed this task:\n   " + removed.toString());
 
                     ui.show("Now you have " + tasks.size() + " tasks in the list.\n");
 
@@ -139,9 +134,7 @@ public class Shiho {
                     String[] todoArr = input.split("todo ");
                     tasks.add(new ToDo(todoArr[1]));
                 } catch (IndexOutOfBoundsException e) {
-                    ui.show(
-                            "Wrong input syntax. Correct syntax is 'todo (task name)'.\n"
-                    );
+                    ui.show("Wrong input syntax. Correct syntax is 'todo (task name)'.\n");
                     isValid = false;
                 }
                 break;
@@ -150,7 +143,7 @@ public class Shiho {
                 /* given the command deadline finish homework /by 2026-01-25 2000:
                     deadlineArr1 = [, finish homework /by 2026-01-25 2000]
                     deadlineArr2 = [finish homework, 2026-01-25 2000]
-                     */
+                */
                 try {
                     String[] deadlineArr1 = input.split("deadline ");
                     String[] deadlineArr2 = deadlineArr1[1].split(" /by ");
@@ -164,10 +157,9 @@ public class Shiho {
 
                     tasks.add(new Deadline(description, dateTime));
                 } catch (IndexOutOfBoundsException | DateTimeParseException e) {
-                    ui.show(
-                            "Wrong input syntax. Correct syntax is 'deadline (task name) /by (deadline)'.\n"
-                                    + "Format for deadline is 'YYYY-MM-DD time'.\n"
-                                    + "Times should be in 24-hour format i.e XXXX.\n"
+                    ui.show("Wrong input syntax. Correct syntax is 'deadline (task name) /by (deadline)'.\n"
+                            + "Format for deadline is 'YYYY-MM-DD time'.\n"
+                            + "Times should be in 24-hour format i.e XXXX.\n"
                     );
                     isValid = false;
                 }
@@ -178,7 +170,7 @@ public class Shiho {
                     eventArr1 = [, family dinner /from 2026-01-25 6pm /to 2026-01-25 7pm]
                     eventArr2 = [family dinner, 2026-01-25 6pm /to 2026-01-25 7pm]
                     eventArr3 = [2026-01-25 6pm, 2026-01-25 7pm]
-                     */
+                */
                 try {
                     String[] eventArr1 = input.split("event ");
                     String[] eventArr2 = eventArr1[1].split(" /from ");
@@ -197,10 +189,9 @@ public class Shiho {
 
                     tasks.add(new Event(eventArr2[0], fromDateTime, toDateTime));
                 } catch (IndexOutOfBoundsException | DateTimeParseException e) {
-                    ui.show(
-                            "Wrong input syntax. Correct syntax is 'event (task name) /from (start) /to (end)'.\n"
-                                    + "Format for both start and end is 'YYYY-MM-DD time'.\n"
-                                    + "Times should be in 24-hour format i.e XXXX.\n"
+                    ui.show("Wrong input syntax. Correct syntax is 'event (task name) /from (start) /to (end)'.\n"
+                            + "Format for both start and end is 'YYYY-MM-DD time'.\n"
+                            + "Times should be in 24-hour format i.e XXXX.\n"
                     );
                     isValid = false;
                 }
@@ -219,9 +210,7 @@ public class Shiho {
 
             if (isValid) {
                 // only increments and adds to task list if task command is valid
-
                 ui.show("\n" + "Got it. I've added this task: " + tasks.get(tasks.size() - 1).toString() + "\n");
-
                 ui.show("Now you have " + tasks.size() + " tasks in the list.\n");
             }
 
@@ -231,7 +220,6 @@ public class Shiho {
                 ui.show("Error saving tasks.");
             }
         }
-
     }
 
     public static void main(String[] args) {
