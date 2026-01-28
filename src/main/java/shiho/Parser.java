@@ -33,19 +33,15 @@ public class Parser {
         } else if (parts[0].equals("delete")) {
             // delete command removes a specific task from the list
             return "delete";
-
+        } else if (parts[0].equals("find")) {
+            // find command finds and returns all tasks containing the specified phrase
+            return "find";
         } else {
             // todo, deadline and event commands indicate specific types of tasks to be added to the list
-
-            boolean isValid = true;
-
             if (userInput.startsWith("todo")) {
                 return "todo";
-
             } else if (userInput.startsWith("deadline")) {
                 return "deadline";
-
-
             } else if (userInput.startsWith("event")) {
                 return "event";
             } else {
