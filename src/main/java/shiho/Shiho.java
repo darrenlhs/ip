@@ -133,34 +133,34 @@ public class Shiho {
                 isValid = false;
                 break;
 
-                case "find":
-                    String[] findArr = input.split("find ");
-                    isValid = false;
-                    if (tasks.isEmpty()) {
-                        ui.show("The task list is empty; no tasks to be found.\n");
-                        continue;
-                    }
-                    String searchPhrase = findArr[1];
-                    ArrayList<Task> matchingTasks = new ArrayList<>();
+            case "find":
+                String[] findArr = input.split("find ");
+                isValid = false;
+                if (tasks.isEmpty()) {
+                    ui.show("The task list is empty; no tasks to be found.\n");
+                    continue;
+                }
+                String searchPhrase = findArr[1];
+                ArrayList<Task> matchingTasks = new ArrayList<>();
 
-                    for (Task t: tasks.getAll()) {
-                        if (t.description.contains(searchPhrase)) {
-                            matchingTasks.add(t);
-                        }
+                for (Task t: tasks.getAll()) {
+                    if (t.description.contains(searchPhrase)) {
+                        matchingTasks.add(t);
                     }
-                    if (!matchingTasks.isEmpty()) {
-                        ui.show("Here are the matching tasks in your list:");
-                        for (int j = 0; j < matchingTasks.size(); j++) {
-                            Task t = matchingTasks.get(j);
-                            ui.show((j + 1) + "." + t);
-                        }
-                    } else {
-                        ui.show("Sorry, no matching tasks were found. " +
-                                "Please double check your search phrase and task list again.\n");
+                }
+                if (!matchingTasks.isEmpty()) {
+                    ui.show("Here are the matching tasks in your list:");
+                    for (int j = 0; j < matchingTasks.size(); j++) {
+                        Task t = matchingTasks.get(j);
+                        ui.show((j + 1) + "." + t);
                     }
-                    break;
+                } else {
+                    ui.show("Sorry, no matching tasks were found. " +
+                            "Please double check your search phrase and task list again.\n");
+                }
+                break;
 
-                case "todo":
+            case "todo":
                 try {
                     String[] todoArr = input.split("todo ");
                     tasks.add(new ToDo(todoArr[1]));
