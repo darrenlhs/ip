@@ -1,10 +1,17 @@
 package shiho;
 
+/**
+ * A class representing a task.
+ */
 public class Task {
 
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Initialises a Task object with a description.
+     * @param description The task description.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

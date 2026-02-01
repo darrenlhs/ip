@@ -2,6 +2,9 @@ package shiho;
 
 import java.util.Scanner;
 
+/**
+ * A class representing the text UI of the chatbot (obsolete as of Level-10).
+ */
 public class Ui {
 
     private Scanner scanner = new Scanner(System.in);

@@ -3,6 +3,9 @@ package shiho;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A class that processes the user input.
+ */
 public class Parser {
 
     public Parser() {}

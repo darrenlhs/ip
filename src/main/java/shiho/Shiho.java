@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * A class representing the Shiho chatbot.
+ */
 public class Shiho {
 
     private Storage storage;
@@ -12,6 +15,11 @@ public class Shiho {
     private Parser parser;
     private String startupMessage;
 
+    /**
+     * Initialises a Shiho object with the corresponding file path.
+     * @param filePath The file path containing the task list file.
+     *
+     */
     public Shiho(String filePath) {
         storage = new Storage(filePath);
         parser = new Parser();
@@ -57,7 +65,7 @@ public class Shiho {
                             + tasks.get(i).toString();
 
                     if (i == tasks.size() - 1) {
-                        response +="\n"; // adds a newline if it's the last element of the list
+                        response += "\n"; // adds a newline if it's the last element of the list
                     }
                 }
             }
@@ -149,8 +157,8 @@ public class Shiho {
                     response += (j + 1) + "." + t;
                 }
             } else {
-                response = "Sorry, no matching tasks were found. " +
-                        "Please double check your search phrase and task list again.\n";
+                response = "Sorry, no matching tasks were found. "
+                        + "Please double check your search phrase and task list again.\n";
             }
             break;
 
