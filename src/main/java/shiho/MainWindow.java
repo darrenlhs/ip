@@ -1,15 +1,11 @@
 package shiho;
 
 import javafx.application.Platform;
-
 import javafx.fxml.FXML;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-
 import javafx.scene.image.Image;
-
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 /**
@@ -30,6 +26,9 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/ichika.jpg"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/shiho.jpeg"));
 
+    /**
+     * Initialises the main window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

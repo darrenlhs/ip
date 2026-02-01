@@ -1,17 +1,17 @@
 package shiho;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
 
     @Test
-    public void size_twoTasks_2() {
+    public void testSize2Tasks() {
         ArrayList<Task> tasks = new ArrayList<>();
         tasks.add(new ToDo("math homework"));
         tasks.add(

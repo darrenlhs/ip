@@ -1,8 +1,10 @@
 package shiho;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * A class representing the task list.
+ */
 public class TaskList {
 
     private ArrayList<Task> tasks;
