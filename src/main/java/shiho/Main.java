@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Shiho shiho = new Shiho("data/tasks.txt");
+    private Shiho shiho = new Shiho("data/tasks.txt", "data/notes.txt");
 
     @Override
     public void start(Stage stage) {

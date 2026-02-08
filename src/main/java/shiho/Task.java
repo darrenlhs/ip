@@ -3,7 +3,6 @@ package shiho;
 /**
  * A class representing a task.
  */
-@SuppressWarnings("checkstyle:Regexp")
 public class Task {
 
     private String description;
