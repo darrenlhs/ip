@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Storage {
 
-    private Path filePath;
+    private final Path filePath;
 
     public Storage(String filePath) {
         this.filePath = Paths.get(filePath);
