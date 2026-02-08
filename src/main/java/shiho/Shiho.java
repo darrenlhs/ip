@@ -11,23 +11,27 @@ import java.util.ArrayList;
 @SuppressWarnings("checkstyle:Regexp")
 public class Shiho {
 
-    private Storage storage;
+    private Storage fileStorage;
+    private Storage noteStorage;
     private TaskList tasks;
+    private NoteList notes;
     private Parser parser;
     private String startupMessage;
 
     /**
      * Initialises a Shiho object with the corresponding file path.
-     * @param filePath The file path containing the task list file.
+     * @param taskFilePath The file path containing the task list file.
      *
      */
-    public Shiho(String filePath) {
-        storage = new Storage(filePath);
+    public Shiho(String taskFilePath, String noteFilePath) {
+        fileStorage = new Storage(taskFilePath);
+        noteStorage = new Storage(noteFilePath);
         parser = new Parser();
         startupMessage = "";
 
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(fileStorage.loadTasks());
+            notes = new NoteList(noteStorage.loadNotes());
         } catch (Exception e) {
             startupMessage = "No existing task list found in storage. Creating empty task list.";
             tasks = new TaskList();
@@ -74,17 +78,24 @@ public class Shiho {
         case "event":
             response = handleEvent(input);
             break;
-
+        case "notenew":
+            response = handleNoteCreate(input);
+            break;
+        case "notelist":
+            response = handleNoteList();
+            break;
+        case "notedelete":
+            response = handleNoteDelete(userInputParts);
+            break;
         case "invalid":
             response = handleInvalid();
             break;
-
         default:
             assert false : "Unknown parser phrase: " + parserPhrase;
             break;
         }
 
-        return saveTasks(response);
+        return saveTasksAndNotes(response);
     }
 
     /**
@@ -108,7 +119,11 @@ public class Shiho {
         StringBuilder response = new StringBuilder("Here are your tasks:\n");
         for (int i = 0; i < tasks.size(); i++) {
             int number = i + 1;
-            response.append(number).append(".").append(tasks.get(i).toString()).append("\n");
+            response.append(number)
+                    .append(".")
+                    .append(" ")
+                    .append(tasks.get(i).toString())
+                    .append("\n");
 
             if (i == tasks.size() - 1) {
                 response.append("\n"); // adds a newline if it's the last element of the list
@@ -118,7 +133,7 @@ public class Shiho {
     }
 
     /**
-     * Handles the "mark" user input.
+     * Handles the "mark (index)" user input.
      *
      * @return The response string to be printed to the user.
      */
@@ -144,7 +159,7 @@ public class Shiho {
     }
 
     /**
-     * Handles the "unmark" user input.
+     * Handles the "unmark (index)" user input.
      *
      * @return The response string to be printed to the user.
      */
@@ -170,7 +185,7 @@ public class Shiho {
     }
 
     /**
-     * Handles the "delete" user input.
+     * Handles the "delete (index)" user input.
      *
      * @return The response string to be printed to the user.
      */
@@ -179,7 +194,7 @@ public class Shiho {
             int taskNumber = Integer.parseInt(userInputParts[1]);
             Task removed = tasks.remove(taskNumber - 1);
             return "Noted. I've removed this task:\n   " + removed.toString() + "\n"
-                    + "Now you have " + tasks.size() + " tasks in the list.\n";
+                    + returnTaskAmountStr();
 
         } catch (IndexOutOfBoundsException | NullPointerException e) {
             if (tasks.isEmpty()) {
@@ -193,7 +208,7 @@ public class Shiho {
     }
 
     /**
-     * Handles the "find" user input.
+     * Handles the "find (phrase)" user input.
      *
      * @param userInput The user input.
      * @return The response string to be printed to the user.
@@ -234,7 +249,7 @@ public class Shiho {
     }
 
     /**
-     * Handles the "todo" user input.
+     * Handles the "todo (description)" user input.
      *
      * @param userInput The user input.
      * @return The response string to be printed to the user.
@@ -251,7 +266,7 @@ public class Shiho {
     }
 
     /**
-     * Handles the "deadline" user input.
+     * Handles the "deadline (description) /by (by datetime)" user input.
      *
      * @param userInput The user input.
      * @return The response string to be printed to the user.
@@ -283,7 +298,7 @@ public class Shiho {
     }
 
     /**
-     * Handles the "event" user input.
+     * Handles the "event (description) /from (fromdatetime) /to (todatetime)" user input.
      *
      * @param userInput The user input.
      * @return The response string to be printed to the user.
@@ -323,6 +338,83 @@ public class Shiho {
     }
 
     /**
+     * Handles the "notenew /title (title) /desc (description)" user input.
+     *
+     * @param userInput The user input.
+     * @return The response string to be printed to the user.
+     */
+    private String handleNoteCreate(String userInput) {
+        /*
+        Note command syntax: note /title (title) /desc (description)
+        Example: note /title My first day /desc It was fun!
+        noteArr1 = { note, My first day /desc It was fun! }
+        noteArr2 = { My first day, It was fun! }
+         */
+        try {
+            String[] noteArr1 = userInput.split(" /title ");
+            String[] noteArr2 = noteArr1[1].split(" /desc ");
+            String title = noteArr2[0];
+            String description = noteArr2[1];
+
+            notes.add(new Note(title, description));
+        } catch (Exception e) {
+            return "Wrong input syntax. Correct syntax is 'notenew /title (title) /desc (description)'.";
+        }
+        // this point will only be reached if the input is valid
+        String response = "\n" + "Got it. I've added this note:\n " + notes.get(notes.size() - 1).toString() + "\n";
+        response += returnNoteAmountStr();
+        return response;
+    }
+
+    /**
+     * Handles the "notelist" user input.
+     *
+     * @return The response string to be printed to the user.
+     */
+    private String handleNoteList() {
+        if (notes.isEmpty()) {
+            return "The note list is empty.\n";
+        }
+        StringBuilder response = new StringBuilder("Here are your notes: \n");
+        for (int i = 0; i < notes.size(); i++) {
+            int number = i + 1;
+            response.append(number)
+                    .append(".")
+                    .append(" ")
+                    .append(notes.get(i).toString())
+                    .append("\n");
+
+            if (i == notes.size() - 1) {
+                response.append("\n"); // adds a newline if it's the last element of the list
+            }
+        }
+        return response.toString();
+    }
+
+    /**
+     * Handles the "notedelete (index)" user input.
+     *
+     * @return The response string to be printed to the user.
+     */
+    private String handleNoteDelete(String[] userInputParts) {
+        try {
+            int noteNumber = Integer.parseInt(userInputParts[1]);
+            Note removed = notes.remove(noteNumber - 1);
+            return "Noted. I've removed this note:\n   " + removed.toString() + "\n"
+                    + returnNoteAmountStr();
+
+        } catch (IndexOutOfBoundsException | NullPointerException e) {
+            if (notes.isEmpty()) {
+                return "The note list is empty.\n";
+            } else {
+                return "Invalid note index\n";
+            }
+        } catch (NumberFormatException e) {
+            return "Non-integer note index provided\n";
+        }
+    }
+
+    /**
      * Handles an invalid response from the user, including empty inputs.
      *
      * @return The response string to be printed out to the user.
@@ -338,9 +430,27 @@ public class Shiho {
      */
     private String returnValidTaskResponse() {
         String response = "\n" + "Got it. I've added this task: " + tasks.get(tasks.size() - 1).toString() + "\n";
-        response += "Now you have " + tasks.size() + " tasks in the list.\n";
+        response += returnTaskAmountStr();
         assert !tasks.isEmpty() : "Valid command but no task was added";
         return response;
+    }
+
+    private String returnTaskAmountStr() {
+        if (tasks.size() == 1) {
+            return "Now you have 1 task in the list.\n";
+        }
+        return "Now you have " + tasks.size() + " tasks in the list.\n";
+    }
+
+    /**
+     * Returns the string when notes are added/removed from the note list.
+     * @return
+     */
+    private String returnNoteAmountStr() {
+        if (notes.size() == 1) {
+            return "Now you have 1 note in the list.\n";
+        }
+        return "Now you have " + notes.size() + " notes in the list.\n";
     }
 
     /**
@@ -349,11 +459,12 @@ public class Shiho {
      * @param response The existing response to be returned to the user.
      * @return The response String to be printed, if an error is encountered.
      */
-    private String saveTasks(String response) {
+    private String saveTasksAndNotes(String response) {
         try {
-            storage.save(tasks.getAll());
+            fileStorage.saveTasks(tasks.getAll());
+            noteStorage.saveNotes(notes.getAll());
         } catch (Exception e) {
-            response = "Error saving tasks.";
+            response = "Error saving tasks or notes.";
         }
         return response;
     }

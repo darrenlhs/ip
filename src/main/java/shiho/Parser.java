@@ -31,7 +31,6 @@ public class Parser {
         } else if (userInputParts[0].equals("mark")) {
             // mark command marks a specific task as done
             return "mark";
-
         } else if (userInputParts[0].equals("unmark")) {
             // unmark command marks a specific task as undone
             return "unmark";
@@ -50,6 +49,12 @@ public class Parser {
                 return "deadline";
             } else if (userInput.startsWith("event")) {
                 return "event";
+            } else if (userInput.startsWith("notenew")) {
+                return "notenew";
+            } else if (userInput.equals("notelist")) {
+                return "notelist";
+            } else if (userInputParts[0].equals("notedelete")) {
+                return "notedelete";
             } else {
                 return "invalid";
             }
@@ -62,7 +67,7 @@ public class Parser {
      * @param line The current line in the text file being parsed.
      * @return Task object represented by the line.
      */
-    public static Task parseFileLine(String line) {
+    public static Task parseFileLineTask(String line) {
         String[] fileLineParts = line.split(" \\| ");
 
         // fileLineParts[0] = X
@@ -95,5 +100,21 @@ public class Parser {
             task.setIsDone(isDone);
             return task;
         }
+    }
+
+    /**
+     * Returns a Note object that the file line represents.
+     *
+     * @param line The current line in the text file being parsed.
+     * @return Note object represented by the line.
+     */
+    public static Note parseFileLineNote(String line) {
+        // note string in file: (note title): (note description)
+        // fileLineParts[0] = note title
+        // fileLineParts[1] = note description
+        String[] fileLineParts = line.split(": ");
+        String title = fileLineParts[0];
+        String description = fileLineParts[1];
+        return new Note(title, description);
     }
 }

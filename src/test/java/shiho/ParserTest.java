@@ -14,7 +14,7 @@ public class ParserTest {
     @Test
     public void test_parseFileLine() {
         Parser parser = new Parser();
-        Task targetTask = parser.parseFileLine("D | 0 | buy milk at the store | 2026-01-27 2200");
-        assertEquals("buy milk at the store", targetTask.description);
+        Task targetTask = parser.parseFileLineTask("D | 0 | buy milk at the store | 2026-01-27 2200");
+        assertEquals("buy milk at the store", targetTask.getDescription());
     }
 }

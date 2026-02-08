@@ -40,6 +40,6 @@ public class TaskListTest {
                                 DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")))
         );
 
-        assertEquals("finish science project", tasks.get(1).description);
+        assertEquals("finish science project", tasks.get(1).getDescription());
     }
 }
