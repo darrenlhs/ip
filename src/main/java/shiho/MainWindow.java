@@ -24,7 +24,7 @@ public class MainWindow extends AnchorPane {
     private Shiho shiho;
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/ichika.jpg"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/shiho.jpeg"));
+    private final Image shihoImage = new Image(this.getClass().getResourceAsStream("/images/shiho.jpeg"));
 
     /**
      * Initialises the main window.
@@ -35,9 +35,9 @@ public class MainWindow extends AnchorPane {
 
         // Shiho's initial greeting to the user
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(
+                DialogBox.getShihoDialog(
                         "Hello, I'm Shiho Hinomori. What do you need?",
-                        dukeImage
+                        shihoImage
                 )
         );
     }
@@ -49,7 +49,7 @@ public class MainWindow extends AnchorPane {
         // check for errors in loading the task list file from storage and display error message
         if (!shiho.getStartupMessage().isEmpty()) {
             dialogContainer.getChildren().add(
-                    DialogBox.getDukeDialog(shiho.getStartupMessage(), dukeImage)
+                    DialogBox.getShihoDialog(shiho.getStartupMessage(), shihoImage)
             );
         }
     }
@@ -64,7 +64,7 @@ public class MainWindow extends AnchorPane {
         String response = shiho.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getShihoDialog(response, shihoImage)
         );
         userInput.clear();
 

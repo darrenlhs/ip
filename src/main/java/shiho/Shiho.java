@@ -39,7 +39,7 @@ public class Shiho {
      * @return String to be sent to the MainWindow class to be printed out
      */
     public String getResponse(String input) {
-        String[] parts = input.split(" ");
+        String[] userInputParts = input.split(" ");
         String response = "";
 
         String parserPhrase = parser.parse(input);
@@ -62,7 +62,8 @@ public class Shiho {
                     int number = i + 1;
                     response += number
                             + "."
-                            + tasks.get(i).toString();
+                            + tasks.get(i).toString()
+                            + "\n";
 
                     if (i == tasks.size() - 1) {
                         response += "\n"; // adds a newline if it's the last element of the list
@@ -74,13 +75,13 @@ public class Shiho {
 
         case "mark":
             try {
-                int taskNumber = Integer.parseInt(parts[1]);
+                int taskNumber = Integer.parseInt(userInputParts[1]);
                 tasks.get(taskNumber - 1).markAsDone();
                 response = "Okay. I've marked this task as done:\n"
                         + "   ["
                         + tasks.get(taskNumber - 1).getStatusIcon()
                         + "] "
-                        + tasks.get(taskNumber - 1).description
+                        + tasks.get(taskNumber - 1).getDescription()
                         + "\n";
             } catch (IndexOutOfBoundsException | NullPointerException e) {
                 if (tasks.isEmpty()) {
@@ -96,13 +97,13 @@ public class Shiho {
 
         case "unmark":
             try {
-                int taskNumber = Integer.parseInt(parts[1]);
+                int taskNumber = Integer.parseInt(userInputParts[1]);
                 tasks.get(taskNumber - 1).markAsUndone();
                 response = "Okay. I've marked this task as not done yet:\n"
                         + "   ["
                         + tasks.get(taskNumber - 1).getStatusIcon()
                         + "] "
-                        + tasks.get(taskNumber - 1).description
+                        + tasks.get(taskNumber - 1).getDescription()
                         + "\n";
             } catch (IndexOutOfBoundsException | NullPointerException e) {
                 if (tasks.isEmpty()) {
@@ -118,7 +119,7 @@ public class Shiho {
 
         case "delete":
             try {
-                int taskNumber = Integer.parseInt(parts[1]);
+                int taskNumber = Integer.parseInt(userInputParts[1]);
                 Task removed = tasks.remove(taskNumber - 1);
                 response = "Noted. I've removed this task:\n   " + removed.toString() + "\n";
 
@@ -146,7 +147,7 @@ public class Shiho {
             ArrayList<Task> matchingTasks = new ArrayList<>();
 
             for (Task t: tasks.getAll()) {
-                if (t.description.contains(searchPhrase)) {
+                if (t.getDescription().contains(searchPhrase)) {
                     matchingTasks.add(t);
                 }
             }

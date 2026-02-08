@@ -3,10 +3,11 @@ package shiho;
 /**
  * A class representing a task.
  */
+@SuppressWarnings("checkstyle:Regexp")
 public class Task {
 
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Initialises a Task object with a description.
@@ -38,6 +39,14 @@ public class Task {
      */
     public void markAsUndone() {
         isDone = false;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setIsDone(Boolean bool) {
+        isDone = bool;
     }
 
     /**
