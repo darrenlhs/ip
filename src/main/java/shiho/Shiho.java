@@ -38,11 +38,13 @@ public class Shiho {
      *
      * @return String to be sent to the MainWindow class to be printed out
      */
+    @SuppressWarnings("checkstyle:WhitespaceAround")
     public String getResponse(String input) {
         String[] userInputParts = input.split(" ");
         String response = "";
 
         String parserPhrase = parser.parse(input);
+        assert parserPhrase != null : "Parser output should not be null";
 
         // initially assume input is valid (isValid only applies for todo/deadline/event commands)
         // hence, isValid is set to false for all commands except todo/deadline/event ones
@@ -236,6 +238,7 @@ public class Shiho {
             break;
 
         default:
+            assert false : "Unknown parser phrase: " + parserPhrase;
             break;
         }
 
@@ -243,6 +246,7 @@ public class Shiho {
             // only increments and adds to task list if task command is valid
             response = "\n" + "Got it. I've added this task: " + tasks.get(tasks.size() - 1).toString() + "\n";
             response += "Now you have " + tasks.size() + " tasks in the list.\n";
+            assert !tasks.isEmpty() : "Valid command but no task was added";
         }
 
         try {
