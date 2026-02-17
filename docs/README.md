@@ -7,32 +7,36 @@
 Ever felt this way before? Fear not, with ShihoBot, you'll no longer have to struggle through the following things ever again:
 - Rummaging through tons of tasks and struggling to find a specific one
 - Trying to get a consolidated, clear representation of all your tasks
-- ~Editing existing tasks in the case of a last-minute change~ (okay, ShihoBot isn't THAT good... yet)
+- ~~Editing existing tasks in the case of a last-minute change~~ (okay, ShihoBot isn't THAT good... yet)
 
 Here's what you need to do to get it running:
 1. Download the .jar file [here.](https://github.com/darrenlhs/ip/releases/tag/A-Jar)
 2. Run the file.
 3. Learn the commands (which is **really easy and simple**)
-4. Use it and feel your worries start floating away ☁️.
+4. Use it and feel your worries start floating away ☁️
 
 What ShihoBot can currently do:
-- [x] Add new tasks to the list
-- [x] Save existing tasks to the disk in a .txt file
-- [x] Remove, mark/unmark and find specific tasks
+[x] Add new tasks to the list
+[x] Save existing tasks to the disk in a .txt file
+[x] Remove, mark/unmark and find specific tasks
 
 Here's a sneak peek of the `Shiho` class's constructor:
 
 ```java
-public Shiho(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+public Shiho(String taskFilePath, String noteFilePath) {
+        taskStorage = new Storage(taskFilePath);
+        noteStorage = new Storage(noteFilePath);
         parser = new Parser();
+        startupMessage = "";
 
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(taskStorage.loadTasks());
+            notes = new NoteList(noteStorage.loadNotes());
         } catch (Exception e) {
-            ui.showLoadError();
+            e.printStackTrace();
+            startupMessage = "No existing task list found in storage. Creating empty task list.";
             tasks = new TaskList();
+            notes = new NoteList();
         }
     }
  ```
@@ -41,10 +45,9 @@ public Shiho(String filePath) {
 
 By using the ```bye``` command, Shiho instantly exits its current instance, saving any stored tasks and notes to your local task and note text files, allowing for retrieval on the next launch. Take note that the entire window will be closed upon using this command. 
 
-It is recommended to use this over just exiting by clicking the 'X' button in the top right corner to ensure that your tasks and notes are properly saved to your system. 
+*It is recommended to use this over just exiting by clicking the 'X' button in the top right corner to ensure that your tasks and notes are properly saved to your system.* 
 
-**Basic syntax:**
-```bye```
+**Basic syntax:** ```bye```
 
 ## Adding tasks
 
@@ -88,8 +91,7 @@ Now you have 3 tasks in the list.
 
 The ```list``` command will list all currently stored tasks in your task list. If your task list is empty, a corresponding response will be printed out. 
 
-**Basic syntax:**
-```list```
+**Basic syntax:** ```list```
 
 (leave no spaces whatsoever. It is just the word 'list')
 
