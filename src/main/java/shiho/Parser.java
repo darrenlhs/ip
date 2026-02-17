@@ -23,18 +23,15 @@ public class Parser {
         if (userInput.equals("bye")) {
             // bye command ends the current instance
             return "bye";
-
         } else if (userInput.equals("list")) {
             // list command displays current list of tasks
             return "list";
-
         } else if (userInputParts[0].equals("mark")) {
             // mark command marks a specific task as done
             return "mark";
         } else if (userInputParts[0].equals("unmark")) {
             // unmark command marks a specific task as undone
             return "unmark";
-
         } else if (userInputParts[0].equals("delete")) {
             // delete command removes a specific task from the list
             return "delete";

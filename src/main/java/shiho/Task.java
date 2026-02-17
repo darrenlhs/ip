@@ -48,6 +48,9 @@ public class Task {
         isDone = bool;
     }
 
+    public Boolean getIsDone() {
+        return isDone;
+    }
     /**
      * Returns the string representation of the task, including its status icon and description.
      *
