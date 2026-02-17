@@ -33,8 +33,10 @@ public class Shiho {
             tasks = new TaskList(taskStorage.loadTasks());
             notes = new NoteList(noteStorage.loadNotes());
         } catch (Exception e) {
+            e.printStackTrace();
             startupMessage = "No existing task list found in storage. Creating empty task list.";
             tasks = new TaskList();
+            notes = new NoteList();
         }
     }
 
