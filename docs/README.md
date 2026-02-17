@@ -44,9 +44,7 @@ By using the ```bye``` command, Shiho instantly exits its current instance, savi
 It is recommended to use this over just exiting by clicking the 'X' button in the top right corner to ensure that your tasks and notes are properly saved to your system. 
 
 **Basic syntax:**
-```
-bye
-```
+```bye```
 
 ## Adding tasks
 
@@ -68,13 +66,11 @@ Event:
 *similar to deadline, time is in YYYY-MM-DD XXXX format
 
 **Examples (all times must be in the specified format, and all slashes are mandatory!):**
-```
-todo buy groceries
+```todo buy groceries```
 
-deadline math homework /by 2026-02-17 2200
+```deadline math homework /by 2026-02-17 2200```
 
-event family dinner /from 2026-02-17 1830 /to 2026-02-17 1930
-```
+```event family dinner /from 2026-02-17 1830 /to 2026-02-17 1930```
 
 **Outputs for all 3 examples above (assuming they are done consecutively in the same instance):**
 ```
