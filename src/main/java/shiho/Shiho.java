@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @SuppressWarnings("checkstyle:Regexp")
 public class Shiho {
 
-    private Storage fileStorage;
+    private Storage taskStorage;
     private Storage noteStorage;
     private TaskList tasks;
     private NoteList notes;
@@ -24,13 +24,13 @@ public class Shiho {
      *
      */
     public Shiho(String taskFilePath, String noteFilePath) {
-        fileStorage = new Storage(taskFilePath);
+        taskStorage = new Storage(taskFilePath);
         noteStorage = new Storage(noteFilePath);
         parser = new Parser();
         startupMessage = "";
 
         try {
-            tasks = new TaskList(fileStorage.loadTasks());
+            tasks = new TaskList(taskStorage.loadTasks());
             notes = new NoteList(noteStorage.loadNotes());
         } catch (Exception e) {
             startupMessage = "No existing task list found in storage. Creating empty task list.";
@@ -461,7 +461,7 @@ public class Shiho {
      */
     private String saveTasksAndNotes(String response) {
         try {
-            fileStorage.saveTasks(tasks.getAll());
+            taskStorage.saveTasks(tasks.getAll());
             noteStorage.saveNotes(notes.getAll());
         } catch (Exception e) {
             response = "Error saving tasks or notes.";
@@ -475,6 +475,22 @@ public class Shiho {
      */
     public String getStartupMessage() {
         return startupMessage;
+    }
+
+    public TaskList getTaskList() {
+        return tasks;
+    }
+
+    public NoteList getNoteList() {
+        return notes;
+    }
+
+    public Storage getTaskStorage() {
+        return taskStorage;
+    }
+
+    public Storage getNoteStorage() {
+        return noteStorage;
     }
 }
 
