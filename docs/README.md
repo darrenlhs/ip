@@ -44,7 +44,9 @@ By using the ```bye``` command, Shiho instantly exits its current instance, savi
 It is recommended to use this over just exiting by clicking the 'X' button in the top right corner to ensure that your tasks and notes are properly saved to your system. 
 
 **Basic syntax:**
-```bye```
+```
+bye
+```
 
 ## Adding tasks
 
