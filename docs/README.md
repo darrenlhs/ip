@@ -20,28 +20,9 @@ What ShihoBot can currently do:
 - [x] Save existing tasks to the disk in a .txt file
 - [x] Remove, mark/unmark and find specific tasks
 
-Here's a sneak peek of the `Shiho` class's constructor:
+Now, let's cover all key features that Shiho currently has to offer!
 
-```java
-public Shiho(String taskFilePath, String noteFilePath) {
-        taskStorage = new Storage(taskFilePath);
-        noteStorage = new Storage(noteFilePath);
-        parser = new Parser();
-        startupMessage = "";
-
-        try {
-            tasks = new TaskList(taskStorage.loadTasks());
-            notes = new NoteList(noteStorage.loadNotes());
-        } catch (Exception e) {
-            e.printStackTrace();
-            startupMessage = "No existing task list found in storage. Creating empty task list.";
-            tasks = new TaskList();
-            notes = new NoteList();
-        }
-    }
- ```
-
-## Exiting the current instance
+## Exiting the current instance 
 
 By using the ```bye``` command, Shiho instantly exits its current instance, saving any stored tasks and notes to your local task and note text files, allowing for retrieval on the next launch. Take note that the entire window will be closed upon using this command. 
 
