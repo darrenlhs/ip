@@ -47,7 +47,8 @@ By using the ```bye``` command, Shiho instantly exits its current instance, savi
 
 *It is recommended to use this over just exiting by clicking the 'X' button in the top right corner to ensure that your tasks and notes are properly saved to your system.* 
 
-**Basic syntax:** ```bye```
+**Basic syntax:** 
+```bye```
 
 ## Adding tasks
 
@@ -91,7 +92,8 @@ Now you have 3 tasks in the list.
 
 The ```list``` command will list all currently stored tasks in your task list. If your task list is empty, a corresponding response will be printed out. 
 
-**Basic syntax:** ```list```
+**Basic syntax:** 
+```list```
 
 (leave no spaces whatsoever. It is just the word 'list')
 
