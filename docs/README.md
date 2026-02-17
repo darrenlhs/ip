@@ -101,13 +101,13 @@ Here are your tasks:
 3. [E][] family dinner (from: Feb 17 2026 1830 to Feb 17 2026 1930)
 ```
 
-
 ## Marking and unmarking tasks
 
 The ```mark``` and ```unmark``` commands are used to mark completion of your tasks. They are useful for tracking which tasks you've already done and which ones are yet to be completed. Marking an already done task or unmarking an undone task has no additional effect.
 
 **Basic syntax:**
 ```mark (index)```
+
 ```unmark (index)``` 
 
 Take note that the index starts from 1, not 0! It matches the numbered listing of your tasks in the ```list``` command.
