@@ -114,6 +114,7 @@ Here are your tasks:
 The ```mark``` and ```unmark``` commands are used to mark completion of your tasks. They are useful for tracking which tasks you've already done and which ones are yet to be completed. Marking an already done task or unmarking an undone task has no additional effect.
 
 **Basic syntax:**
+
 ```
 mark (index)
 ```
@@ -174,6 +175,7 @@ find (search phrase)
 ```
 
 **Example:**
+
 ```find homework```
 
 **Output:**
@@ -214,9 +216,7 @@ Now you have 2 notes in the list.
 Similar to the ```list``` command for tasks, but for notes instead.
 
 **Basic syntax:**
-```
-notelist
-```
+```notelist```
 
 (again, no extra spaces anywhere)
 
