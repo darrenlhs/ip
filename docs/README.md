@@ -16,9 +16,9 @@ Here's what you need to do to get it running:
 4. Use it and feel your worries start floating away ☁️
 
 What ShihoBot can currently do:
-[x] Add new tasks to the list
-[x] Save existing tasks to the disk in a .txt file
-[x] Remove, mark/unmark and find specific tasks
+- [x] Add new tasks to the list
+- [x] Save existing tasks to the disk in a .txt file
+- [x] Remove, mark/unmark and find specific tasks
 
 Here's a sneak peek of the `Shiho` class's constructor:
 
@@ -48,7 +48,9 @@ By using the ```bye``` command, Shiho instantly exits its current instance, savi
 *It is recommended to use this over just exiting by clicking the 'X' button in the top right corner to ensure that your tasks and notes are properly saved to your system.* 
 
 **Basic syntax:** 
-```bye```
+```
+bye
+```
 
 ## Adding tasks
 
@@ -93,7 +95,9 @@ Now you have 3 tasks in the list.
 The ```list``` command will list all currently stored tasks in your task list. If your task list is empty, a corresponding response will be printed out. 
 
 **Basic syntax:** 
-```list```
+```
+list
+```
 
 (leave no spaces whatsoever. It is just the word 'list')
 
@@ -110,9 +114,13 @@ Here are your tasks:
 The ```mark``` and ```unmark``` commands are used to mark completion of your tasks. They are useful for tracking which tasks you've already done and which ones are yet to be completed. Marking an already done task or unmarking an undone task has no additional effect.
 
 **Basic syntax:**
-```mark (index)```
+```
+mark (index)
+```
 
-```unmark (index)``` 
+```
+unmark (index)
+``` 
 
 Take note that the index starts from 1, not 0! It matches the numbered listing of your tasks in the ```list``` command.
 
@@ -142,7 +150,9 @@ Okay, I've marked this task as not done yet:
 The ```delete``` command allows you to remove a specific task from the list permanently. Again, this index starts from 1 and corresponds to the task's numbered listing from the ```list``` command.
 
 **Basic syntax:**
-```delete (index)```
+```
+delete (index)
+```
 
 **Example:**
 ```delete 3```
@@ -159,7 +169,9 @@ Now you have 2 tasks in the list.
 The ```find``` command allows you to filter tasks depending on a specific character or phrase. The matching tasks will be listed in numbered order (though the number might not correspond to their numbering in the main task list).
 
 **Basic syntax:**
-```find (search phrase)```
+```
+find (search phrase)
+```
 
 **Example:**
 ```find homework```
@@ -175,7 +187,9 @@ Here are the matching tasks in your list:
 On top of managing tasks, Shiho can also help you to store notes. Notes come with a title and description, and are represented in the format "(title): (description)" in lists. First, let's go through adding new notes. This is done through the ```notenew``` command.
 
 **Basic syntax:**
-```notenew /title (title) /desc (description)```
+```
+notenew /title (title) /desc (description)
+```
 
 **Example (adding 2 notes):**
 ```
@@ -200,7 +214,9 @@ Now you have 2 notes in the list.
 Similar to the ```list``` command for tasks, but for notes instead.
 
 **Basic syntax:**
-```notelist```
+```
+notelist
+```
 
 (again, no extra spaces anywhere)
 
@@ -216,7 +232,9 @@ Here are your notes:
 Similar to the ```delete``` command for tasks, but for notes instead.
 
 **Basic syntax:**
-```notedelete (index)```
+```
+notedelete (index)
+```
 
 (as usual, index starts from 1 and matches the numbered ordering of your notes in the note list)
 
