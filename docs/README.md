@@ -22,6 +22,8 @@ What ShihoBot can currently do:
 
 Now, let's cover all key features that Shiho currently has to offer!
 
+[TOC]
+
 ## Exiting the current instance 
 
 By using the ```bye``` command, Shiho instantly exits its current instance, saving any stored tasks and notes to your local task and note text files, allowing for retrieval on the next launch. Take note that the entire window will be closed upon using this command. 
@@ -45,12 +47,14 @@ ToDo:
 Deadline:
 ```deadline (task description) /by (deadline)``` 
 
-*deadline is in YYYY-MM-DD XXXX format, where XXXX is 24-hour time
+[!NOTE]\
+```deadline``` is in YYYY-MM-DD XXXX format, where XXXX is 24-hour time
 
 Event:
 ```event (task description) /from (time) /to (time)```
 
-*similar to deadline, time is in YYYY-MM-DD XXXX format
+[!NOTE]\
+Similar to ```deadline```, ```time``` is in YYYY-MM-DD XXXX format
 
 **Examples (all times must be in the specified format, and all slashes are mandatory!):**
 ```
@@ -81,8 +85,8 @@ The ```list``` command will list all currently stored tasks in your task list. I
 ```
 list
 ```
-
-(leave no spaces whatsoever. It is just the word 'list')
+[!NOTE]\
+Leave no spaces whatsoever. It is just the word 'list'.
 
 **Output (using the 3 added tasks from earlier):**
 ```
@@ -106,6 +110,7 @@ mark (index)
 unmark (index)
 ``` 
 
+[!NOTE]\
 Take note that the index starts from 1, not 0! It matches the numbered listing of your tasks in the ```list``` command.
 
 **Examples:**
@@ -201,7 +206,8 @@ Similar to the ```list``` command for tasks, but for notes instead.
 **Basic syntax:**
 ```notelist```
 
-(again, no extra spaces anywhere)
+[!NOTE]\
+Again, no extra spaces anywhere.
 
 **Output:**
 ```
