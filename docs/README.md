@@ -10,7 +10,7 @@ Ever felt this way before? Fear not, with ShihoBot, you'll no longer have to str
 - ~~Editing existing tasks in the case of a last-minute change~~ (okay, ShihoBot isn't THAT good... yet)
 
 Here's what you need to do to get it running:
-1. Download the .jar file [here.](https://github.com/darrenlhs/ip/releases/tag/A-Jar)
+1. Download the .jar file [here.](https://github.com/darrenlhs/ip/releases/tag/A-Release)
 2. Run the file.
 3. Learn the commands (which is **really easy and simple**)
 4. Use it and feel your worries start floating away ☁️
