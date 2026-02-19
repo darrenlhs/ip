@@ -22,8 +22,6 @@ What ShihoBot can currently do:
 
 Now, let's cover all key features that Shiho currently has to offer!
 
-[TOC]
-
 ## Exiting the current instance 
 
 By using the ```bye``` command, Shiho instantly exits its current instance, saving any stored tasks and notes to your local task and note text files, allowing for retrieval on the next launch. Take note that the entire window will be closed upon using this command. 
