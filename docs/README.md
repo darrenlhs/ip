@@ -22,6 +22,18 @@ What ShihoBot can currently do:
 
 Now, let's cover all key features that Shiho currently has to offer!
 
+Table of Features:
+- [Exiting the current instance (```bye```)](#exiting-the-current-instance)
+- [Adding tasks (```todo```, ```deadline``` and ```event```)](#adding-tasks)
+- [Listing tasks (```list```)](#listing-tasks)
+- [Marking and unmarking tasks (```mark``` and ```unmark```)](#marking-and-unmarking-tasks)
+- [Deleting tasks (```delete```)](#deleting-tasks)
+- [Finding tasks (```find```)](#finding-tasks)
+- [Adding notes (```notenew```)](#adding-notes)
+- [Listing notes (```notelist```)](#listing-notes)
+- [Deleting notes (```notedelete```)](#deleting-notes)
+- [Invalid inputs](#invalid-inputs)
+
 ## Exiting the current instance 
 
 By using the ```bye``` command, Shiho instantly exits its current instance, saving any stored tasks and notes to your local task and note text files, allowing for retrieval on the next launch. Take note that the entire window will be closed upon using this command. 
@@ -35,31 +47,39 @@ bye
 
 ## Adding tasks
 
-Adding tasks (of which there are 3 types: ToDo, Deadline and Event) causes them to be stored to your local task list text file. Each of them has slightly different syntax.
+Adding tasks **(of which there are 3 types: ToDo, Deadline and Event)** causes them to be stored to your local task list text file. Each of them has slightly different syntax.
 
 **Basic syntax:**
 
 ToDo:
-```todo (task description)```
+```
+todo (task description)
+```
 
 Deadline:
-```deadline (task description) /by (deadline)``` 
+```
+deadline (task description) /by (deadline)
+``` 
 
-[!NOTE]\
-```deadline``` is in YYYY-MM-DD XXXX format, where XXXX is 24-hour time
+**(```deadline``` is in YYYY-MM-DD XXXX format, where XXXX is 24-hour time)**
 
 Event:
-```event (task description) /from (time) /to (time)```
+```
+event (task description) /from (time) /to (time)
+```
 
-[!NOTE]\
-Similar to ```deadline```, ```time``` is in YYYY-MM-DD XXXX format
+**(Similar to ```deadline```, ```time``` is in YYYY-MM-DD XXXX format)**
 
 **Examples (all times must be in the specified format, and all slashes are mandatory!):**
 ```
 todo buy groceries
+```
 
+```
 deadline math homework /by 2026-02-17 2200
+```
 
+```
 event family dinner /from 2026-02-17 1830 /to 2026-02-17 1930
 ```
 
@@ -67,10 +87,14 @@ event family dinner /from 2026-02-17 1830 /to 2026-02-17 1930
 ```
 Got it. I've added this task: [T][] buy groceries
 Now you have 1 task in the list.
+```
 
+```
 Got it. I've added this task: [D][] math homework (by Feb 17 2026 2200)
 Now you have 2 tasks in the list.
+```
 
+```
 Got it. I've added this task: [E][] family dinner (from: Feb 17 2026 1830 to Feb 17 2026 1930)
 Now you have 3 tasks in the list.
 ```
@@ -83,8 +107,7 @@ The ```list``` command will list all currently stored tasks in your task list. I
 ```
 list
 ```
-[!NOTE]\
-Leave no spaces whatsoever. It is just the word 'list'.
+**(Leave no spaces whatsoever. It is just the word 'list'.)**
 
 **Output (using the 3 added tasks from earlier):**
 ```
@@ -108,15 +131,18 @@ mark (index)
 unmark (index)
 ``` 
 
-[!NOTE]\
-Take note that the index starts from 1, not 0! It matches the numbered listing of your tasks in the ```list``` command.
+**(Take note that the index starts from 1, not 0! It matches the numbered listing of your tasks in the ```list``` command.)**
 
 **Examples:**
 ```
 mark 1
+```
 
+```
 mark 2
+```
 
+```
 unmark 2
 ```
 
@@ -124,10 +150,14 @@ unmark 2
 ```
 Okay, I've marked this task as done:
    [X] buy groceries
+```
 
+```
 Okay, I've marked this task as done:
    [X] math homework
+```
 
+```
 Okay, I've marked this task as not done yet:
    [] math homework
 ```
@@ -142,7 +172,9 @@ delete (index)
 ```
 
 **Example:**
-```delete 3```
+```
+delete 3
+```
 
 **Output:**
 ```
@@ -182,16 +214,20 @@ notenew /title (title) /desc (description)
 **Example (adding 2 notes):**
 ```
 notenew /title First day of school /desc It was fun!
+```
 
+```
 notenew /title What's tested for the midterms /desc Chapters 1 to 5
 ```
 
-**Output:**
+**Outputs:**
 ```
 Got it. I've added this note:
 First day of school: It was fun!
 Now you have 1 note in the list.
+```
 
+```
 Got it. I've added this note:
 What's tested for the midterms: Chapters 1 to 5
 Now you have 2 notes in the list.
@@ -202,10 +238,11 @@ Now you have 2 notes in the list.
 Similar to the ```list``` command for tasks, but for notes instead.
 
 **Basic syntax:**
-```notelist```
+```
+notelist
+```
 
-[!NOTE]\
-Again, no extra spaces anywhere.
+(Again, no extra spaces anywhere.)
 
 **Output:**
 ```
