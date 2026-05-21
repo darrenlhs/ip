@@ -9,4 +9,4 @@ Shiho is a chatbot application built in Java, developed as part of an individual
 - Find tasks by keyword
 - Supports different task types: todos, deadlines, and events
 
-**Setup:** JDK 17 required. Open in IntelliJ and run Shiho.main().
+**Setup:** JDK 17 required. Open in IntelliJ and run `Shiho.main()`.
