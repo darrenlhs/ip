@@ -4,7 +4,7 @@ Shiho is a chatbot application built in Java, developed as part of an individual
 
 ## Features:
 - Add, list, and delete tasks
-- Add, list and delete notes
+- Add, list, and delete notes
 - Mark and unmark tasks as completed
 - Find tasks by keyword
 - Supports different task types: todos, deadlines, and events
